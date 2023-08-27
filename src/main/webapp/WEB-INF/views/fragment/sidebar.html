@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body th:fragment="sidebar">
+<aside class="col-md-3 sidebar">
+
+  <th:block th:if="${session.userIsLogin}">
+  <div id="profile-widget-2" class="widget profile-widget">
+    <h3 class="widget_title">Profile</h3>
+    <div class="widget_profile"></div>
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="user_quick_links">
+          <li style="margin-bottom: 10px;padding-bottom: 10px;border-bottom: 1px solid #ecedee;">
+            <a th:href="@{|/users/profile/${session.userIsLogin.id}|}"><i class="icon-home"></i> Profile page</a></li>
+          <li style="margin-bottom: 10px;padding-bottom: 10px;border-bottom: 1px solid #ecedee;">
+            <a th:href="@{|/users/edit/${session.userIsLogin.id}|}"><i class="icon-pencil"></i> Edit profile</a></li>
+          <li style="margin-bottom: 10px;padding-bottom: 10px;border-bottom: 1px solid #ecedee;">
+            <a th:href="@{/logout}"><i class="icon-signout"></i> Logout</a></li>
+        </ul></div><!-- End col-md-4 -->
+    </div><!-- End row -->
+  </div>
+  </th:block>
+
+  <div class="widget widget_stats">
+    <h3 class="widget_title">Stats</h3>
+    <div class="ul_list ul_list-icon-ok">
+      <ul>
+        <li><i class="icon-question-sign"></i>Questions ( <span th:text="${allQuestions.size()}"></span> )</li>
+        <li><i class="icon-comment"></i>Answers ( <span th:text="${allAnswers.size()}"></span> )</li>
+        <li><i class="icon-user"></i>Members ( <span th:text="${allUsers.size()}"></span> )</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="widget widget_highest_points">
+    <h3 class="widget_title">New members</h3>
+    <ul th:each="user:${newUsers}">
+      <li>
+        <div class="author-img">
+            <a th:href="@{|/users/profile/${user.id}|}"><img width="60" height="60" th:src="@{|/avatar/${user.avatar}|}" alt="avatar"></a>
+        </div>
+        <h6><a th:href="@{|/users/profile/${user.id}|}" th:text="${user.fullName}"></a></h6>
+      </li>
+
+    </ul>
+  </div>
+
+
+</aside><!-- End sidebar -->
+</body>
+</html>

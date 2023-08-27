@@ -1,0 +1,37 @@
+!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>404</title>
+	<th:block th:insert="/fragment/head::head"></th:block>
+</head>
+
+<body>
+
+<div id="wrap" class="grid_1200">
+
+	<th:block th:insert="fragment/header::hh" ></th:block>
+
+	<section class="container main-content">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="error_404">
+					<div>
+						<h2>404</h2>
+						<h3>Page not Found</h3>
+					</div>
+					<div class="clearfix"></div><br>
+					<a href="index.html" class="button large color margin_0">Home Page</a>
+				</div>
+			</div><!-- End main -->
+		</div><!-- End row -->
+	</section><!-- End container -->
+
+	<th:block th:insert="fragment/footer::footer"></th:block>
+
+</div><!-- End wrap -->
+
+<th:block th:insert="fragment/script::script"></th:block>
+
+</body>
+
+</html>

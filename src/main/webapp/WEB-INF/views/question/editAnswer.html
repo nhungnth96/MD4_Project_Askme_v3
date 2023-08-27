@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Edit Answer</title>
+  <th:block th:insert="/fragment/head::head"></th:block>
+</head>
+<body>
+
+
+
+
+<div id="wrap" class="grid_1200">
+  <th:block th:insert="fragment/header::hh"></th:block>
+
+
+  <section class="container main-content" style="margin-top: 70px">
+    <div class="row">
+      <div class="col-md-9">
+
+        <div class="page-content ask-question">
+          <div class="boxedtitle page-title"><h2>Edit Answer</h2></div>
+
+
+          <div class="form-style form-style-3" id="question-submit">
+            <form th:action="@{/answers/update}" th:object="${editAnswer}" method="post" enctype="multipart/form-data">
+              <input type="hidden" th:field="*{answerId}">
+              <div class="form-inputs clearfix">
+                <label>Attachment</label>
+                <div th:if="${answer.image != ''}">
+                  <img th:src="@{|/image/${answer.image}|}" alt="image">
+                </div>
+                <input type="file" th:field="*{image}">
+              </div>
+              <div id="respond-textarea">
+                <p>
+                  <label class="required" for="comment">Answer<span>*</span></label>
+                  <textarea id="comment" aria-required="true" cols="58" rows="8" th:field="*{body}"></textarea>
+                </p>
+              </div>
+              <p class="form-submit">
+                <input name="submit" type="submit" id="submit" value="Update answer"
+                       class="button small color">
+              </p>
+            </form>
+          </div>
+        </div><!-- End page-content -->
+      </div><!-- End main -->
+      <th:block th:insert="fragment/sidebar::sidebar"></th:block>
+    </div><!-- End row -->
+  </section><!-- End container -->
+
+  <th:block th:insert="fragment/footer::footer"></th:block>
+
+</div><!-- End wrap -->
+
+
+<th:block th:insert="fragment/script::script"></th:block>
+
+</body>
+</html>
