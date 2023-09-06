@@ -12,7 +12,7 @@
 
     <th:block th:insert="fragment/header::hh"></th:block>
 
-    <section class="container main-content">
+    <section class="container main-content " style="margin-top: 70px;">
         <div class="row">
             <div class="col-md-9">
                 <article class="question single-question question-type-normal">
@@ -29,7 +29,7 @@
                                     <img th:src="@{${'/image/' + question.image}}" alt="image">
                                 </div>
                                 <p th:text="${question.body}"></p>
-                                <div class="edit-delete-follow-close-2" >
+                                <div class="edit-delete-follow-close-2" style="display: flex; gap: 20px" >
                                     <th:block th:if="${userIsLogin.id == question.userId}">
                                         <div class="question-edit"><a th:href="@{|/questions/edit/${question.id}|}"  class="tooltip-n color button small margin_0 f_left">Edit</a></div>
                                         <div class="question-delete"><a th:href="@{|/questions/delete/${question.id}|}" class="tooltip-n color button small margin_0 f_left">Delete</a></div>
@@ -40,10 +40,8 @@
                                     </div>
                                 </div>
 
-
-
                             <div class="question-details">
-                                <span class="question-answered"><span th:text="${question.status}"></span></span>
+                                <span class="question-answered question-answered-done"   th:utext="${question.status ? '' : '<i class=&quot;icon-ok&quot;></i>'+'solved'}"></span>
                                 <span class="question-favorite"><i class="icon-star"></i><span
                                         th:text="${question.favoriteCount}"></span></span>
                             </div>
@@ -118,8 +116,19 @@
                                             <img th:src="@{${'/image/' + answer.image}}" alt="image">
                                         </div>
                                         <p th:text="${answer.body}"></p>
-                                        <a class="commentform best_answer_a question-report" data-nonce="3f79461e48" title="Select as best answer" href="#">Select as best answer</a>
                                     </div>
+                                    <div class="commentform question-answered question-answered-done"  th:if="${answer.status == false}">
+                                        <i class="icon-ok"></i>Best answer
+                                    </div>
+                                    <th:block th:if="${question.status==true}">
+                                        <div th:if="${answer.status == true && question.userId==session.userIsLogin.id}">
+                                            <a class="commentform best_answer_a question-report" th:href="@{|/questions/select-best-answer/${answer.id}-${question.id}|}">Select as best answer</a>
+                                        </div>
+                                    <div th:if="${answer.status == false && question.userId == session.userIsLogin.id}">
+                                        <a class="commentform best_answer_re question-report" th:href="@{|/questions/select-best-answer/${answer.id}-${question.id}|}" >Cancel the best answer</a>
+                                    </div>
+
+                                    </th:block>
                                 </div>
                             </div>
 

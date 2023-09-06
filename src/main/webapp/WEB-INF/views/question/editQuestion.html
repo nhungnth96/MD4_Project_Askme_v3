@@ -27,7 +27,7 @@
               <div class="form-inputs clearfix">
                 <p>
                   <label class="required">Title<span>*</span></label>
-                  <input type="text" id="question-title" th:field="*{title}">
+                  <input type="text" th:field="*{title}" id="question-title" container main-content>
 
                 </p>
 
@@ -59,7 +59,7 @@
                   <textarea id="question-details" aria-required="true" cols="58" rows="8" th:field="*{body}"></textarea>
                 </p>
               </div>
-              <p >
+              <p style="margin-top: 20px;" >
                 <input type="submit" value="Update question"
                        class="button color small submit">
               </p>

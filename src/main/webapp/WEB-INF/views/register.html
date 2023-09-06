@@ -18,10 +18,11 @@
       <div class="row">
 
         <div class="col-md-6">
-          <div class="page-content" style="margin-top: 70px">
+          <div class="page-content" style="margin: 70px;">
           <div class="form-style form-style-3" >
             <form th:action="@{/register}" th:object="${registerForm}" method="post">
               <div class="form-inputs clearfix">
+                <div style="color: red;margin-bottom: 5px;font-weight: bolder" th:if="${error}" class="error-message" th:text="${error}"></div>
                 <p>
                   <label class="required">Full Name<span>*</span></label>
                   <input type="text" th:field="*{fullName}">
@@ -37,8 +38,8 @@
                 <p>
                   <label class="required">Password<span>*</span></label>
                   <input type="password" th:field="*{password}">
-                  <span>Passwords must contain at least eight characters, including
-                    at least 1 letter and 1 number.</span>
+                  <span>Passwords must contain at least 6 characters, including
+                    at least 1 uppercase letter, 1 lowercase letter and 1 symbol character.</span>
                 </p>
               </div>
               <p class="form-submit">

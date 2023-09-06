@@ -92,7 +92,7 @@ public class UserService implements IGenericService<User,Long>{
         }
         return user;
     }
-    public void formToModel(FormRegisterDto formRegisterDto) {
+    public void register(FormRegisterDto formRegisterDto) {
         // chuyen doi dto sang model
         User user = new User();
         user.setFullName(formRegisterDto.getFullName());
@@ -187,6 +187,7 @@ public class UserService implements IGenericService<User,Long>{
 
         return user;
     }
+
     public boolean validateUsername(String username) {
         String regex = "^[a-zA-Z0-9._#?!@$%^&*-]{5,15}$";
         return Pattern.matches(regex, username);
@@ -228,6 +229,7 @@ public class UserService implements IGenericService<User,Long>{
         }
         return false;
     }
+
     public boolean checkExistEmail(String email){
         Connection con = null;
         try {
@@ -291,5 +293,23 @@ public class UserService implements IGenericService<User,Long>{
         }
         return users;
     }
-
+    public void changeUserStatus(Long userId){
+        Connection con = null;
+        try {
+            con = dataSource.getConnection();
+            CallableStatement callSt = con.prepareCall("{call proc_changeUserStatus(?)}");
+            callSt.setLong(1, userId);
+            callSt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (con!=null){
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
 }

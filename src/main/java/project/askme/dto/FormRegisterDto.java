@@ -1,6 +1,8 @@
 package project.askme.dto;
 
 
+import java.util.regex.Pattern;
+
 public class FormRegisterDto {
     private String fullName;
     private String email;
@@ -48,4 +50,6 @@ public class FormRegisterDto {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
 }

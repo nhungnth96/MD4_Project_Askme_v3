@@ -19,14 +19,17 @@
 		<div class="login">
 			<div class="row">
 				<div class="col-md-6">
-					<div class="page-content" style="margin-top: 70px">
+					<div class="page-content" style="margin-top: 70px;">
 						<div class="form-style form-style-3">
 							<form th:action="@{/login}" th:object="${loginForm}" method="post">
+								<div style="color: red;margin-bottom: 5px;font-weight: bolder" th:if="${error}" class="error-message" th:text="${error}"></div>
 								<div class="form-inputs clearfix">
+
 									<p class="login-text">
 										<input type="text" th:field="*{username}">
 										<i class="icon-user"></i>
 									</p>
+
 									<p class="login-password">
 										<input type="password" th:field="*{password}">
 										<i class="icon-lock"></i>
@@ -51,6 +54,7 @@
 	<th:block th:insert="fragment/footer::footer"></th:block>
 </div><!-- End wrap -->
 <th:block th:insert="fragment/script::script"></th:block>
+
 </body>
 
 </html>

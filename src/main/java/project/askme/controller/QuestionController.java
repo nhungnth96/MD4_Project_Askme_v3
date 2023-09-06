@@ -2,6 +2,7 @@ package project.askme.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -58,6 +59,7 @@ public class QuestionController {
             model.addAttribute("questions", questions);
             return "question/questions";
     }
+
     @GetMapping("/search")
     public String showQuestionBySearch(@RequestParam("keyword") String keyword, Model model) {
         List<Question> questions = new ArrayList<>();
@@ -84,7 +86,7 @@ public class QuestionController {
     @PostMapping("/ask")
     public String actionAsk(@SessionAttribute("userIsLogin") User user,@ModelAttribute("askForm") FormQuestDto formQuestDto) {
         questionService.formToModel(formQuestDto,user);
-        return "redirect:/questions";
+        return "redirect:/";
     }
     // ============================== GET DETAIL ==============================
     @GetMapping("/detail/{questionId}")
@@ -155,10 +157,11 @@ public class QuestionController {
         return "redirect:/questions/detail/" + questionId;
     }
 
-    @RequestMapping("/selectBestAnswer")
-    public String selectBestAnswer(@RequestParam Long answerId, @RequestParam Long questionId) {
+
+    @GetMapping("/select-best-answer/{answerId}-{questionId}")
+    public String selectBestAnswer(@PathVariable Long answerId,@PathVariable Long questionId) {
         answerService.selectBestAnswer(answerId, questionId);
-        return "redirect:/questions/" + questionId;
+        return "redirect:/questions/detail/" + questionId;
     }
 
 }

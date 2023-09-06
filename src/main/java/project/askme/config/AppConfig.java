@@ -4,11 +4,13 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -64,6 +66,8 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
         return viewResolver;
     }
 
+
+
     // =========================Upload=========================
     @Value("${uploadAvatarPath}")
     private String uploadAvatarPath;
@@ -88,6 +92,7 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
                         "classpath:/assets/js/",
                         "classpath:/assets/images/");
     }
+
     // =========================Connect database=========================
     @Value("${datasource-driver}")
     private String driver;
@@ -107,15 +112,10 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
         dataSource.setPassword(password);
         return dataSource;
     }
-    // =========================Validation message=========================
-//    @Bean
-//    public MessageSource messageSource() {
-//        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-//        messageSource.setBasename("message");
-//        messageSource.setDefaultEncoding("UTF-8");
-//        return messageSource;
-//    }
-    }
+
+
+
+}
 
 
 

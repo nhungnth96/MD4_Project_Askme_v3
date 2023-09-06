@@ -87,5 +87,4 @@ public class GlobalController {
         return questionService.findNoAnswersQuestionList();
     }
 
-
 }

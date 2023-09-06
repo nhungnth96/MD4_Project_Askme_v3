@@ -2,6 +2,7 @@ package project.askme.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,33 +27,14 @@ public class AdminController {
     @Autowired
     private AnswerService answerService;
 
-    @ModelAttribute("questionCountToday")
-    public int questionCountToday() {
-        return questionService.getQuestionCountForToday();
-    }
-    @ModelAttribute("questionCountThisWeek")
-    public int questionCountThisWeek() {
-        return questionService.getQuestionCountForThisWeek();
-    }
-    @ModelAttribute("answerCountToday")
-    public int answerCountToday() {
-        return questionService.getAnswerCountForToday();
-    }
-    @ModelAttribute("answerCountThisWeek")
-    public int answerCountThisWeek() {
-        return questionService.getAnswerCountForThisWeek();
-    }
-    @ModelAttribute("userCountToday")
-    public int userCountToday() {
-        return questionService.getUserCountForToday();
-    }
-    @ModelAttribute("userCountThisWeek")
-    public int userCountThisWeek() {
-        return questionService.getUserCountForThisWeek();
-    }
     @GetMapping()
-    public String goDashboard() {
-
+    public String goDashboard(Model model) {
+        model.addAttribute("questionCountToday", questionService.getQuestionCountForToday());
+        model.addAttribute("questionCountThisWeek", questionService.getQuestionCountForThisWeek());
+        model.addAttribute("answerCountToday", questionService.getAnswerCountForToday());
+        model.addAttribute("answerCountThisWeek", questionService.getAnswerCountForThisWeek());
+        model.addAttribute("userCountToday", questionService.getUserCountForToday());
+        model.addAttribute("userCountThisWeek", questionService.getUserCountForThisWeek());
         return "admin/index";
     }
     // ============================== GET USER LIST ==============================
@@ -69,28 +51,49 @@ public class AdminController {
         model.addAttribute("categories", categories);
         return "admin/category";
     }
+    // ============================== ADD CAT ==============================
     @PostMapping("/addCat")
-    public String addCategory(@RequestParam("name") String name) {
+    public String addCat(@RequestParam("name") String name) {
         Category category = new Category();
         category.setName(name);
         categoryService.save(category);
 
         return "redirect:/categories";
     }
-    @PostMapping("/editCat")
-    public String editCategory(@RequestParam ("id")  Long id, @RequestParam ("name") String name) {
-        Category category = categoryService.findById(id);
-        category.setName(name);
-        categoryService.save(category);
-
-        return "redirect:/categories";
+    @GetMapping("/getCategory/{categoryId}")
+    @ResponseBody
+    public ResponseEntity<Category> getCategory(@PathVariable Long categoryId) {
+        Category category = categoryService.findById(categoryId);
+        if (category == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(category);
     }
-    @GetMapping("/delete/{categoryId}")
-    public String deleteAnswer(@PathVariable Long categoryId) {
+//    @GetMapping("/editCat/{catId}")
+//    public String getEditCategoryPage(@PathVariable Long catId, Model model) {
+//        Category category = categoryService.findById(catId);
+//        model.addAttribute("catEdit", category);
+//        return "admin/category"; // Chuyển đến view để hiển thị modal edit
+//    }
+//    @PostMapping("/editCat")
+//    public String editCat(@ModelAttribute("catEdit") Category catEdit) {
+//        Category existingCategory = categoryService.findById(catEdit.getId());
+//        existingCategory.setName(catEdit.getName());
+//        categoryService.save(existingCategory);
+//        return "redirect:/admin/category"; // Chuyển hướng sau khi cập nhật thành công
+//    }
+
+    @GetMapping("/deleteCat/{categoryId}")
+    public String deleteCat(@PathVariable Long categoryId) {
 
         categoryService.delete(categoryId);
 
-        return "redirect:/questions";
+        return "redirect:/categories";
     }
-
+    // ============================== LOCK USER ==============================
+    @GetMapping("/lockUser/{userId}")
+    public String lockUser(@PathVariable("userId") Long userId) {
+        userService.changeUserStatus(userId);
+        return "redirect:/admin/users";
+    }
 }

@@ -1,6 +1,12 @@
 package project.askme.dto;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.Errors;
+import project.askme.service.UserService;
+
+import java.util.regex.Pattern;
+
 public class FormLoginDto {
     private String username;
     private String password;
@@ -28,4 +34,8 @@ public class FormLoginDto {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
+
+
 }

@@ -30,8 +30,9 @@
 							<div class="clearfix"></div>
 							<p class="question-desc" th:text="${question.body}"></p>
 							<div class="question-details">
-								<span class="question-answered"><span th:text="${question.status}"></span></span>
-								<span class="question-favorite"><i class="icon-star"></i><span th:text="${question.favoriteCount}"></span></span>
+								<span class="question-answered question-answered-done" th:utext="${question.status ? '' : '<i class=&quot;icon-ok&quot;></i>'+'solved'}"></span>
+								<span class="question-favorite"><i class="icon-star"></i><span
+										th:text="${question.favoriteCount}"></span></span>
 							</div>
 							<span class="question-category"><i class="icon-folder-close"></i><span th:text="${question.category.name}"></span></span>
 							<span class="question-date"><i class="icon-time"></i><span th:text="${question.createdDate}"></span></span>
@@ -42,7 +43,7 @@
 					</article>
 				</th:block>
 
-				<th:block th:insert="fragment/pagination::pagination"></th:block><!-- End pagination -->
+<!--				<th:block th:insert="fragment/pagination::pagination"></th:block>&lt;!&ndash; End pagination &ndash;&gt;-->
 			</div><!-- End main -->
 			<th:block th:insert="fragment/sidebar::sidebar"></th:block>
 		</div><!-- End row -->

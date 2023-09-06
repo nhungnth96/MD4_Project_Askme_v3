@@ -24,6 +24,7 @@ public class UserController {
     @Autowired
     private UserService userService;
     // ============================== GET USER PROFILE ==============================
+
     @GetMapping("/profile/{userId}")
     public String showUserProfile(@PathVariable("userId") Long userId, Model model) {
         User user = userService.findById(userId);
@@ -71,24 +72,6 @@ public class UserController {
         return "redirect:/users/profile/" + formEditDto.getId() ;
     }
 }
-//        if (user == null) {
-//            model.addAttribute("error", "Username or password is incorrect!!!");
-//        } else if (!userLogin.isStatus()) {
-//            model.addAttribute("error", "Your account has been locked!!!");
-//        } else {
-//            model.addAttribute("userLogin", userLogin);
-//            System.out.println(userLogin);
-//            session.setAttribute("userLogin", userLogin);
-//            if (userLogin.getRole() == 0) {
-//                System.out.println("account đang đăng nhập: " + userLogin);
-//                // admin
-//                return "admin/dashboard";
-//            } else {
-//                // user
-//                return "index";
-//            }
-//        }
-//        return "index";
 
 
 

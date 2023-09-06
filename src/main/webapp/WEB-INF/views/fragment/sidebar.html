@@ -36,7 +36,7 @@
   <div class="widget widget_highest_points">
     <h3 class="widget_title">New members</h3>
     <ul th:each="user:${newUsers}">
-      <li>
+      <li style="margin-bottom: 10px;padding-bottom: 10px">
         <div class="author-img">
             <a th:href="@{|/users/profile/${user.id}|}"><img width="60" height="60" th:src="@{|/avatar/${user.avatar}|}" alt="avatar"></a>
         </div>

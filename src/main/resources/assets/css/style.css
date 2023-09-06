@@ -3859,7 +3859,7 @@ h2 [class^="icons-"], h2 [class*=" icons-"] {
     color: #2f3239;
 }
 .tab-inner-warp .tab-inner > *:last-child {
-	margin-bottom: 0;
+	margin-bottom: 10px;
 }
 .tabs-style-2 .tabs,.tabs-style-3 .tabs {
 	border-bottom: none;

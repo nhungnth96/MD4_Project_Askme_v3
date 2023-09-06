@@ -43,7 +43,6 @@
 					<ul class="tabs">
 						<li class="tab"><a href="" class="current">Recent Questions</a></li>
 						<li class="tab"><a href="">Most Responses</a></li>
-						<li class="tab"><a href="">Recently Answered</a></li>
 						<li class="tab"><a href="">Unanswered</a></li>
 					</ul>
 					<div class="tab-inner-warp">
@@ -62,7 +61,8 @@
 										<div class="clearfix"></div>
 										<p class="question-desc" th:text="${question.body}"></p>
 										<div class="question-details">
-											<span class="question-answered"><span th:text="${question.status}"></span></span>
+											<span class="question-answered question-answered-done" th:utext="${question.status ? '' : '<i class=&quot;icon-ok&quot;></i>'+'solved'}"></span>
+
 											<span class="question-favorite"><i class="icon-star"></i><span th:text="${question.favoriteCount}"></span></span>
 										</div>
 										<span class="question-category"><i class="icon-folder-close"></i><span th:text="${question.category.name}"></span></span>
@@ -93,7 +93,8 @@
 										<div class="clearfix"></div>
 										<p class="question-desc" th:text="${question.body}"></p>
 										<div class="question-details">
-											<span class="question-answered"><span th:text="${question.status}"></span></span>
+											<span class="question-answered question-answered-done" th:utext="${question.status ? '' : '<i class=&quot;icon-ok&quot;></i>'+'solved'}"></span>
+
 											<span class="question-favorite"><i class="icon-star"></i><span th:text="${question.favoriteCount}"></span></span>
 										</div>
 										<span class="question-category"><i class="icon-folder-close"></i><span th:text="${question.category.name}"></span></span>
@@ -124,7 +125,8 @@
 										<div class="clearfix"></div>
 										<p class="question-desc" th:text="${question.body}"></p>
 										<div class="question-details">
-											<span class="question-answered"><span th:text="${question.status}"></span></span>
+											<span class="question-answered question-answered-done" th:utext="${question.status ? '' : '<i class=&quot;icon-ok&quot;></i>'+'solved'}"></span>
+
 											<span class="question-favorite"><i class="icon-star"></i><span th:text="${question.favoriteCount}"></span></span>
 										</div>
 										<span class="question-category"><i class="icon-folder-close"></i><span th:text="${question.category.name}"></span></span>
